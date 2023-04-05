@@ -5,7 +5,7 @@ const cors = require('cors');
 const app = express();
 
 require('dotenv').config();
-const PORT = process.env.PORT || 3000; // Set a default port if PORT is not defined in .env
+const PORT = process.env.PORT; // Set a default port if PORT is not defined in .env
 
 // Middleware
 app.use(express.json());
