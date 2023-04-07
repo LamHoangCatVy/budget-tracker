@@ -25,9 +25,14 @@ export const GlobalProvider = ({ children }) => {
     console.log(response.data);
   };
 
+  const deleteIncome = async (id) => {
+    const res = await axios.delete(`${BASE_URL}delete-income/${id}`);
+    getIncomes();
+  };
+
   return (
     <GlobalContext.Provider
-      value={{ addIncome, incomes, getIncomes, }}
+      value={{ addIncome, incomes, getIncomes, deleteIncome, }}
     >
       {children}
     </GlobalContext.Provider>
