@@ -1,10 +1,10 @@
-import React from "react";
 import styled from "styled-components";
 import avatar from "../../img/avt.jpg";
 import { signout } from "../../utils/Icons";
 import { menuItems } from "../../utils/menuItems";
 
-const Navigation = () => {
+const Navigation = ({ active, setActive }) => {
+
   return (
     <NavStyled>
       <div className="user-icon">
@@ -19,8 +19,8 @@ const Navigation = () => {
           return (
             <li
               key={item.id}
-              //   onClick={() => setActive(item.id)}
-              //   className={active === item.id ? "active" : ""}
+              onClick={() => setActive(item.id)}
+              className={active === item.id ? "active" : ""}
             >
               {item.icon}
               <span>{item.title}</span>
@@ -94,7 +94,7 @@ const NavStyled = styled.nav`
     }
   }
 
-  :active {
+  .active {
     color: rgba(34, 34, 96, 1) !important;
     i {
       color: rgba(34, 34, 96, 1) !important;
