@@ -16,7 +16,7 @@ const Income = () => {
     <IncomeStyled>
       <InnerLayout>
         <h1>Income</h1>
-        <h2 className="total-income">Total Income: <span>${totalIncome()}</span></h2>
+        <h2 className="total-income">Total Income <span>${totalIncome()}</span></h2>
         <div className="income-content">
           <div className="form-container">
             <Form />
