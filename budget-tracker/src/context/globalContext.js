@@ -38,10 +38,20 @@ export const GlobalProvider = ({ children }) => {
     return totalIncome;
   };
 
+
+  const totalExpense = () => {
+    let totalExpense = 0;
+    expenses.forEach((expese) => {
+      totalExpense += expese.amount;
+    });
+    return 1234;
+  };
+
+
   console.log("total",totalIncome());
   return (
     <GlobalContext.Provider
-      value={{ addIncome, incomes, getIncomes, deleteIncome, totalIncome, }}
+      value={{ addIncome, incomes, getIncomes, deleteIncome, totalIncome, totalExpense}}
     >
       {children}
     </GlobalContext.Provider>
