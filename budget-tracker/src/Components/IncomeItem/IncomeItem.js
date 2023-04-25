@@ -24,7 +24,7 @@ import {
 } from "../../utils/Icons";
 import Button from "../Button/Button";
 
-function IncomeItem({
+const IncomeItem = ({
   id,
   title,
   amount,
@@ -34,7 +34,7 @@ function IncomeItem({
   deleteItem,
   indicatorColor,
   type,
-}) {
+}) => {
   const categoryIcon = () => {
     switch (category) {
       case "salary":
@@ -117,7 +117,7 @@ function IncomeItem({
       </div>
     </IncomeItemStyled>
   );
-}
+};
 
 const IncomeItemStyled = styled.div`
   background: #fcf6f9;
