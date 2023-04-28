@@ -11,7 +11,7 @@ const Navigation = ({ active, setActive }) => {
         <img src={avatar} alt="avatar" />
         <div className="text">
           <h1>Kathy</h1>
-          <p>Careful spending</p>
+          <p>Save for future!</p>
         </div>
       </div>
       <ul className="menu-items">
