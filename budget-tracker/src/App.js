@@ -7,6 +7,7 @@ import { useMemo, useState } from "react";
 import Income from "./Components/Income/Income";
 import Expenses from "./Components/Expenses/Expenses";
 import { useGlobalContext } from "./context/globalContext";
+import AboutPage from "./Components/AboutUs/AboutUs";
 
 function App() {
   const [active, setActive] = useState(1);
@@ -15,7 +16,7 @@ function App() {
   const displayData = () => {
     switch (active) {
       case 1:
-        return <Dashboard />;
+        return <AboutPage />;
       case 2:
         return <Dashboard />;
       case 3:
