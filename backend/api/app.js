@@ -1,4 +1,4 @@
-const { db } = require("./db/db");
+const { db } = require("../db/db");
 const { readdirSync } = require("fs");
 const express = require("express");
 const cors = require("cors");
@@ -24,9 +24,7 @@ mongoose.connect(
   "mongodb+srv://catvyisstudying:VIObLgGMntiEZUR6@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority"
 );
 
-app.get("/", (req, res) => {
-  res.json("Hello");
-});
+
 //routes
 readdirSync("./routes").map((route) => {
   app.use("/api/v1", require("./routes/" + route));
