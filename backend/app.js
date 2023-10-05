@@ -12,7 +12,7 @@ const PORT = process.env.PORT; // Set a default port if PORT is not defined in .
 // Middleware
 app.use(
   cors({
-    origin: ["budget-tracker-eight-psi.vercel.app"],
+    origin: ["https://budget-tracker-eight-psi.vercel.app/"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
