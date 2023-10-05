@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://budget-tracker-gules-omega.vercel.app/";
 
 const GlobalContext = React.createContext();
 
