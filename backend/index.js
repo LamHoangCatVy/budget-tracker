@@ -1,26 +1,27 @@
 const { db } = require("./db/db");
-const { readdirSync } = require("fs");
 const express = require("express");
 const { default: mongoose } = require("mongoose");
+const cors = require("cors");
 const app = express();
-const transactionRouter = require('./routes/transactions')
-
+const transactionRouter = require("./routes/transactions");
 
 require("dotenv").config();
-const PORT = process.env.PORT || 3000; // Use the provided PORT or default to 3000
+app.use(
+  cors({
+    origin: ["https://budget-tracker-app-liard.vercel.app/"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 
 // Routes
-app.use('/api/v1/', transactionRouter)
+app.use("/api/v1/", transactionRouter);
 
 // Middleware
 app.use(express.json());
 
-
 const server = () => {
   db(); // Make sure to configure your database connection properly
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
 };
 
 server();
