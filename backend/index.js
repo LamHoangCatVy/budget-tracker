@@ -11,15 +11,12 @@ const PORT = process.env.PORT; // Set a default port if PORT is not defined in .
 
 // Middleware
 app.use(
-  cors({
-    origin: ["https://budget-tracker-eight-psi.vercel.app"],
-    methods: ["POST", "GET", "PUT", "DELETE"],
-    credentials: true,
-  })
+  cors()
 );
 
 app.get("/test", (req, res) => {
   res.send("Hello")
+  console.log(123)
 })
 
 app.use(express.json());
@@ -29,6 +26,7 @@ readdirSync("./routes").map((route) => {
   app.use("/api/v1", require("./routes/" + route));
   console.log(route)
 });
+
 const server = () => {
   db();
   app
