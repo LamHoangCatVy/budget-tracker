@@ -1,4 +1,4 @@
-const { db } = require("../db/db");
+const { db } = require("./db/db");
 const { readdirSync } = require("fs");
 const express = require("express");
 const cors = require("cors");
@@ -12,11 +12,15 @@ const PORT = process.env.PORT; // Set a default port if PORT is not defined in .
 // Middleware
 app.use(
   cors({
-    origin: ["https://budget-tracker-eight-psi.vercel.app/"],
+    origin: ["https://budget-tracker-eight-psi.vercel.app"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
 );
+
+app.get("/test", (req, res) => {
+  res.json("Hello")
+})
 
 app.use(express.json());
 
