@@ -1,6 +1,7 @@
+// ../../backend/index.js
+
 const { db } = require("./db/db");
 const express = require("express");
-const { default: mongoose } = require("mongoose");
 const cors = require("cors");
 const app = express();
 const transactionRouter = require("./routes/transactions");
@@ -24,4 +25,6 @@ const server = () => {
   db(); // Make sure to configure your database connection properly
 };
 
-server();
+module.exports = server; // Export the server function
+
+// If you have other exports, you can add them here.
