@@ -1,17 +1,10 @@
 // const express = require("express");
-// const cors = require("cors");
+const cors = require("cors");
 // const app = express();
 // const transactionRouter = require("./routes/transactions");
 // const mongoose = require("mongoose"); // Import mongoose properly
 
 // require("dotenv").config();
-// app.use(
-//   cors({
-//     origin: ["https://budget-tracker-app-liard.vercel.app/"],
-//     methods: ["POST", "GET"],
-//     credentials: true,
-//   })
-// );
 
 // app.use(express.json());
 // mongoose.connect("mongodb+srv://catvyisstudying:VIObLgGMntiEZUR6@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority");
@@ -33,9 +26,23 @@ app.use(express.json());
 mongoose.connect(
   "mongodb+srv://catvyisstudying:VIObLgGMntiEZUR6@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority"
 );
-app.use("/", (req, res) => {
-  res.send("This is the server")
-});
+app.use(
+  cors({
+    origin: ["https://budget-tracker-app-liard.vercel.app/"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+  );
+  
+  app.use("/", (req, res) => {
+    res.send("This is the server");
+  });
+
+  app.use("/add-expense", (req, res) => {
+    res.send("This is add-expense");
+  });
+  
+
 
 app.listen(3000, () => {
   console.log("Server is Running");
