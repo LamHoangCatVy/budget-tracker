@@ -13,21 +13,14 @@ app.use(
   })
 );
 
+app.use(express.json());
 mongoose.connect("mongodb+srv://catvyisstudying:VIObLgGMntiEZUR6@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority");
 
 // Routes
 app.use("/api/v1/", transactionRouter);
 
 // Middleware
-app.use(express.json());
 
-// Export the server function as the entry point
-const server = () => {
-  const port = process.env.PORT || 3000;
-  app.listen(port, (req,res) => {
-    console.log(port);
-  });
-};
-
-module.exports = server;
-server()
+app.listen(3000, () => {
+  console.log("Server is Running")
+})
