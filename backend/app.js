@@ -25,7 +25,7 @@ mongoose.connect(
 );
 
 app.get("/", (req, res) => {
-  res.send("Hello");
+  res.json("Hello");
 });
 //routes
 readdirSync("./routes").map((route) => {
