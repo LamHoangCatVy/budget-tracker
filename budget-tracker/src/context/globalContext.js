@@ -18,7 +18,7 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const getIncomes = async () => {
-    const response = await axios.get(`https://budget-tracker-gules-omega.vercel.app/get-incomes`);
+    const response = await axios.get(`https://budget-tracker-gules-omega.vercel.app/api/v1/get-incomes`);
     setIncomes(response.data);
     console.log(response.data);
   };

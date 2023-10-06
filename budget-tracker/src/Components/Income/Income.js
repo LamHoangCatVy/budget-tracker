@@ -9,11 +9,9 @@ import IncomeItem from "../IncomeItem/IncomeItem";
 const Income = () => {
   const { incomes, getIncomes, deleteIncome, totalIncome, error } =
     useGlobalContext();
-
   useEffect(() => {
     getIncomes();
   }, []);
-
   return (
     <IncomeStyled>
       <InnerLayout>
@@ -25,20 +23,24 @@ const Income = () => {
             <Form error={error} />
           </div>
           <div className="incomes">
-            {incomes.map((income) => (
-              <IncomeItem
-                key={income._id}
-                id={income._id}
-                title={income.title}
-                description={income.description}
-                amount={income.amount}
-                date={income.date}
-                type={income.type}
-                category={income.category}
-                indicatorColor="var(--color-green)"
-                deleteItem={deleteIncome}
-              />
-            ))}
+            {incomes.map((income) => {
+              const { _id, title, amount, date, category, description, type } =
+                income;
+              return (
+                <IncomeItem
+                  key={_id}
+                  id={_id}
+                  title={title}
+                  description={description}
+                  amount={amount}
+                  date={date}
+                  type={type}
+                  category={category}
+                  indicatorColor="var(--color-green)"
+                  deleteItem={deleteIncome}
+                />
+              );
+            })}
           </div>
         </div>
       </InnerLayout>
