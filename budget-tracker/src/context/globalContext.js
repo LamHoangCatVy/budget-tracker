@@ -24,7 +24,7 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const deleteIncome = async (id) => {
-    const res = await axios.delete(`https://budget-tracker-gules-omega.vercel.app/api/v1/delete-income/${id}`);
+    await axios.delete(`https://budget-tracker-gules-omega.vercel.app/api/v1/delete-income/${id}`);
     getIncomes();
   };
 
@@ -52,7 +52,7 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const deleteExpense = async (id) => {
-    const res = await axios.delete(`https://budget-tracker-gules-omega.vercel.app/api/v1/delete-expense/${id}`);
+    await axios.delete(`https://budget-tracker-gules-omega.vercel.app/api/v1/delete-expense/${id}`);
     getExpenses();
   };
 
