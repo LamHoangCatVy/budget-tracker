@@ -10,7 +10,7 @@ export const GlobalProvider = ({ children }) => {
 
   const addIncome = async (income) => {
     const response = await axios
-      .post(`https://budget-tracker-gules-omega.vercel.app/add-income`, income)
+      .post(`https://budget-tracker-gules-omega.vercel.app/api/v1/add-income`, income)
       .catch((error) => {
         setError(error.response.data.message);
       });
