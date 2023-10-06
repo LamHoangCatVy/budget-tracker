@@ -35,7 +35,7 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
+app.get("/get-incomes", (req, res) => {
   res.send("This is the server");
 });
 
