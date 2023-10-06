@@ -3,8 +3,19 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-const { addIncome, getIncomes, deleteIncome } = require('./controllers/income')
-const { addExpense, getExpenses, deleteExpense } = require('./controllers/expense')
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+
+const { addIncome, getIncomes, deleteIncome } = require("./controllers/income");
+const {
+  addExpense,
+  getExpenses,
+  deleteExpense,
+} = require("./controllers/expense");
 
 app.use(express.json());
 mongoose.connect(
@@ -20,14 +31,14 @@ app.use(
 );
 
 // Add income routes
-app.post('/api/v1/add-income', addIncome)
-app.get('/api/v1/get-incomes', getIncomes)
-app.delete('/api/v1/delete-income/:id', deleteIncome)
+app.post("/api/v1/add-income", addIncome);
+app.get("/api/v1/get-incomes", getIncomes);
+app.delete("/api/v1/delete-income/:id", deleteIncome);
 
 // Add expense routes
-app.post('/api/v1/add-expense', addExpense)
-app.get('/api/v1/get-expenses', getExpenses)
-app.delete('/api/v1/delete-expense/:id', deleteExpense)
+app.post("/api/v1/add-expense", addExpense);
+app.get("/api/v1/get-expenses", getExpenses);
+app.delete("/api/v1/delete-expense/:id", deleteExpense);
 
 app.listen(3000, () => {
   console.log("Server is Running");
