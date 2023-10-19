@@ -25,7 +25,7 @@ mongoose.connect(
 app.use(
   cors({
     origin: ["https://budget-tracker-app-liard.vercel.app/"],
-    methods: ["POST", "GET"],
+    methods: ["POST", "GET", "DELETE"],
     credentials: true,
   })
 );
