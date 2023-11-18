@@ -1,10 +1,11 @@
 require("dotenv").config();
-
+// const db = require("./db");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const userRoutes = require("./routes/user");
+
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "https://budget-tracker-app-liard.vercel.app"); // Remove trailing slash
@@ -57,3 +58,5 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
+
+//db()
