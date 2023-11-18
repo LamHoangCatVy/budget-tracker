@@ -1,13 +1,24 @@
 require("dotenv").config();
+<<<<<<< HEAD
 
+=======
+// const db = require("./db");
+>>>>>>> b13a2297719fb004860a83370a22ee9e104ada1b
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const userRoutes = require("./routes/user");
+<<<<<<< HEAD
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "https://budget-tracker-app-liard.vercel.app/"); // Remove trailing slash
+=======
+
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://budget-tracker-app-liard.vercel.app"); // Remove trailing slash
+>>>>>>> b13a2297719fb004860a83370a22ee9e104ada1b
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, OPTIONS"
@@ -28,7 +39,11 @@ app.use(express.json());
 
 app.use(
   cors({
+<<<<<<< HEAD
     origin: ["https://budget-tracker-app-liard.vercel.app/"], // Remove trailing slash
+=======
+    origin: ["https://budget-tracker-app-liard.vercel.app"], // Remove trailing slash
+>>>>>>> b13a2297719fb004860a83370a22ee9e104ada1b
     methods: ["POST", "GET", "DELETE"],
     credentials: true,
   })
@@ -57,3 +72,8 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
+<<<<<<< HEAD
+=======
+
+//db()
+>>>>>>> b13a2297719fb004860a83370a22ee9e104ada1b
