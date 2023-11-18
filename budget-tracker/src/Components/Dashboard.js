@@ -54,25 +54,11 @@ function Dashboard() {
             </h2>
             <div className="salary-item">
               <p>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD:budget-tracker/src/Components/Dashboard.js
-=======
-                $
->>>>>>> b13a2297719fb004860a83370a22ee9e104ada1b:budget-tracker/src/Components/Dashboard/Dashboard.js
->>>>>>> 4e384fffacc52b783aca30db732c7395a46c1b5c
                 {incomes.length > 0
                   ? Math.min(...incomes.map((item) => item.amount))
                   : -Infinity}
               </p>
               <p>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD:budget-tracker/src/Components/Dashboard.js
-=======
-                $
->>>>>>> b13a2297719fb004860a83370a22ee9e104ada1b:budget-tracker/src/Components/Dashboard/Dashboard.js
->>>>>>> 4e384fffacc52b783aca30db732c7395a46c1b5c
                 {incomes.length > 0
                   ? Math.max(...incomes.map((item) => item.amount))
                   : Infinity}
@@ -83,25 +69,11 @@ function Dashboard() {
             </h2>
             <div className="salary-item">
               <p>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD:budget-tracker/src/Components/Dashboard.js
-=======
-                $
->>>>>>> b13a2297719fb004860a83370a22ee9e104ada1b:budget-tracker/src/Components/Dashboard/Dashboard.js
->>>>>>> 4e384fffacc52b783aca30db732c7395a46c1b5c
                 {expenses.length > 0
                   ? Math.min(...expenses.map((item) => item.amount))
                   : -Infinity}
               </p>
               <p>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD:budget-tracker/src/Components/Dashboard.js
-=======
-                $
->>>>>>> b13a2297719fb004860a83370a22ee9e104ada1b:budget-tracker/src/Components/Dashboard/Dashboard.js
->>>>>>> 4e384fffacc52b783aca30db732c7395a46c1b5c
                 {expenses.length > 0
                   ? Math.max(...expenses.map((item) => item.amount))
                   : Infinity}
