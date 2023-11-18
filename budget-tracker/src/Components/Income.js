@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { InnerLayout } from "../../styles/Layout";
-import { useGlobalContext } from "../../context/globalContext";
-import Form from "../Form/Form";
+import { InnerLayout } from "../styles/Layout";
+import { useGlobalContext } from "../context/globalContext";
+import Form from "./Form";
 import { useEffect } from "react";
-import IncomeItem from "../IncomeItem/IncomeItem";
+import IncomeItem from "./IncomeItem";
 
 const Income = () => {
-  const { incomes, getIncomes, deleteIncome, totalIncome, error } =
+  const { incomes, getIncomes, deleteIncome, totalIncome, error, updateIncome } =
     useGlobalContext();
   useEffect(() => {
     getIncomes();
@@ -24,7 +24,7 @@ const Income = () => {
           </div>
           <div className="incomes">
             {incomes.map((income) => {
-              const { _id, title, amount, date, category, description, type } =
+              const { _id, title, amount, date, category, description, type, } =
                 income;
               return (
                 <IncomeItem
@@ -38,6 +38,7 @@ const Income = () => {
                   category={category}
                   indicatorColor="var(--color-green)"
                   deleteItem={deleteIncome}
+                  
                 />
               );
             })}
