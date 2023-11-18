@@ -1,8 +1,21 @@
 import styled from "styled-components";
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:budget-tracker/src/Components/Navigation.js
+>>>>>>> 4e384fffacc52b783aca30db732c7395a46c1b5c
 import { menuItems, signupItem, loginItem } from "../utils/menuItems";
 import { Link } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
+<<<<<<< HEAD
+=======
+=======
+import { menuItems, signupItem, loginItem } from "../../utils/menuItems";
+import { Link } from "react-router-dom";
+import { useLogout } from "../../hooks/useLogout";
+import { useAuthContext } from "../../hooks/useAuthContext";
+>>>>>>> b13a2297719fb004860a83370a22ee9e104ada1b:budget-tracker/src/Components/Navigation/Navigation.js
+>>>>>>> 4e384fffacc52b783aca30db732c7395a46c1b5c
 
 const Navigation = ({ active, setActive }) => {
   const { logout } = useLogout();
