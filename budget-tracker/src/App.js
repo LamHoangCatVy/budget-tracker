@@ -1,22 +1,18 @@
 import styled from "styled-components";
-import { BrowserRouter } from "react-router-dom";
-import { useMemo, useState } from "react";
 import { MainLayout } from "./styles/Layout";
-import AboutPage from "./Components/AboutUs";
-import Orb from "./Components/Orb";
-import Navigation from "./Components/Navigation";
-import Dashboard from "./Components/Dashboard";
-import Income from "./Components/Income";
+import Orb from "./Components/Orb/Orb";
+import Navigation from "./Components/Navigation/Navigation";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import { useMemo, useState } from "react";
+import Income from "./Components/Income/Income";
 import Expenses from "./Components/Expenses/Expenses";
-import Login from "./Pages/Login";
-import Signup from "./Pages/Signup";
-
 import { useGlobalContext } from "./context/globalContext";
+import AboutPage from "./Components/AboutUs/AboutUs";
 
 function App() {
   const [active, setActive] = useState(1);
 
-  const global = useGlobalContext();
+  const global = useGlobalContext() 
   const displayData = () => {
     switch (active) {
       case 1:
@@ -27,11 +23,6 @@ function App() {
         return <Income />;
       case 4:
         return <Expenses />;
-      case 5:
-        return <Signup />;
-      case 6:
-        return <Login />;
-
       default:
         return <Dashboard />;
     }
@@ -40,17 +31,15 @@ function App() {
   const orbMemo = useMemo(() => {
     return <Orb />;
   }, []);
-
+  
   return (
-    <BrowserRouter>
-      <AppStyled className="App">
-        {orbMemo}
-        <MainLayout>
-          <Navigation active={active} setActive={setActive} />
-          <main>{displayData()}</main>
-        </MainLayout>
-      </AppStyled>
-    </BrowserRouter>
+    <AppStyled className="App">
+      {orbMemo}
+      <MainLayout>
+        <Navigation active={active} setActive={setActive} />
+        <main>{displayData()}</main>
+      </MainLayout>
+    </AppStyled>
   );
 }
 const AppStyled = styled.div`

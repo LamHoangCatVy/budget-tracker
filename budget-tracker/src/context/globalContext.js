@@ -10,7 +10,10 @@ export const GlobalProvider = ({ children }) => {
 
   const addIncome = async (income) => {
     const response = await axios
-      .post(`https://budget-tracker-gules-omega.vercel.app/api/v1/add-income`, income)
+      .post(
+        `https://budget-tracker-gules-omega.vercel.app/api/v1/add-income`,
+        income
+      )
       .catch((error) => {
         setError(error.response.data.message);
       });
@@ -22,20 +25,14 @@ export const GlobalProvider = ({ children }) => {
       `https://budget-tracker-gules-omega.vercel.app/api/v1/get-incomes`
     );
     setIncomes(response.data);
-  };
-
-  const updateIncome = async (id, income) => {
-    const response = await axios
-      .put(`https://budget-tracker-gules-omega.vercel.app/api/v1/update-income/${id}`, income)
-      .catch((error) => {
-        setError(error.response.data.message);
-      });
-    getIncomes();
+    console.log(response.data);
   };
 
   const deleteIncome = async (id) => {
     try {
-      await axios.delete(`https://budget-tracker-gules-omega.vercel.app/api/v1/delete-income/${id}`);
+      await axios.delete(
+        `https://budget-tracker-gules-omega.vercel.app/api/v1/delete-income/${id}`
+      );
       getIncomes();
     } catch (error) {
       console.error("Error deleting income:", error);
@@ -52,7 +49,10 @@ export const GlobalProvider = ({ children }) => {
 
   const addExpense = async (income) => {
     const response = await axios
-      .post(`https://budget-tracker-gules-omega.vercel.app/api/v1/add-expense`, income)
+      .post(
+        `https://budget-tracker-gules-omega.vercel.app/api/v1/add-expense`,
+        income
+      )
       .catch((err) => {
         setError(err.response.data.message);
       });
@@ -67,17 +67,10 @@ export const GlobalProvider = ({ children }) => {
     console.log(response.data);
   };
 
-  const updateExpense = async (id, expense) => {
-    const response = await axios
-      .put(`https://budget-tracker-gules-omega.vercel.app/update-expense/${id}`, expense)
-      .catch((error) => {
-        setError(error.response.data.message);
-      });
-    getExpenses();
-  };
-
   const deleteExpense = async (id) => {
-    await axios.delete(`https://budget-tracker-gules-omega.vercel.app/api/v1/delete-expense/${id}`);
+    await axios.delete(
+      `https://budget-tracker-gules-omega.vercel.app/api/v1/delete-expense/${id}`
+    );
     getExpenses();
   };
 
@@ -108,13 +101,11 @@ export const GlobalProvider = ({ children }) => {
         addIncome,
         incomes,
         getIncomes,
-        updateIncome,
         deleteIncome,
         totalIncome,
         expenses,
         addExpense,
         getExpenses,
-        updateExpense,
         deleteExpense,
         totalExpenses,
         error,
