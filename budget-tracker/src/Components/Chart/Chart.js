@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Chart as ChartJs,
   CategoryScale,
@@ -27,8 +27,24 @@ ChartJs.register(
   ArcElement
 );
 
-function Chart() {
+const Chart = () => {
   const { incomes, expenses } = useGlobalContext();
+  const [chartOption, setChartOption] = useState("income");
+  const [chartWidth, setChartWidth] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setChartWidth(chartContainerRef.current.offsetWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  });
+
   const sortedIncomes = incomes.sort(
     (a, b) => new Date(a.date) - new Date(b.date)
   );
@@ -36,7 +52,7 @@ function Chart() {
     (a, b) => new Date(a.date) - new Date(b.date)
   );
 
-  const data = {
+  const incomeData = {
     labels: sortedIncomes.map((inc) => dateFormat(inc.date)),
     datasets: [
       {
@@ -45,6 +61,12 @@ function Chart() {
         backgroundColor: "green",
         tension: 0.2,
       },
+    ],
+  };
+
+  const expenseData = {
+    labels: sortedExpenses.map((exp) => dateFormat(exp.date)),
+    datasets: [
       {
         label: "Expenses",
         data: sortedExpenses.map((expense) => expense.amount),
@@ -54,25 +76,107 @@ function Chart() {
     ],
   };
 
+  const alignDataWithDates = (data, labels) => {
+    const alignedData = [];
+    for (let i = 0; i < labels.length; i++) {
+      const date = labels[i];
+      const matchingData = data.find((item) => dateFormat(item.date) === date);
+      alignedData.push(matchingData ? matchingData.amount : null);
+    }
+    return alignedData;
+  };
+
+  let chartData;
+
+  if (chartOption === "income") {
+    chartData = incomeData;
+  } else if (chartOption === "expense") {
+    chartData = expenseData;
+  } else {
+    const allLabels = [...new Set([...incomeData.labels, ...expenseData.labels])];
+    allLabels.sort((a, b) => new Date(a) - new Date(b));
+  
+    const alignedData = alignDataWithDates([...sortedIncomes, ...sortedExpenses], allLabels);
+  
+    chartData = {
+      labels: allLabels,
+      datasets: [
+        {
+          label: "Income and Expenses",
+          data: alignedData,
+          backgroundColor: alignedData.map((dataPoint, index) => {
+            const type = index < sortedIncomes.length ? "income" : "expense";
+            return type === "income" ? "rgba(0, 128, 0, 0.5)" : "rgba(255, 0, 0, 0.5)";
+          }),
+          tension: 0.2,
+        },
+      ],
+    };
+  }
+    
+  const chartContainerRef = React.createRef();
+
   return (
-    <ChartStyled>
-      <Line data={data} />
-    </ChartStyled>
+    <ChartContainer ref={chartContainerRef}>
+      <OptionsContainer>
+        <OptionLabel>
+          <input
+            type="radio"
+            value="income"
+            checked={chartOption === "income"}
+            onChange={() => setChartOption("income")}
+          />
+          <span>Income</span>
+        </OptionLabel>
+        <OptionLabel>
+          <input
+            type="radio"
+            value="expense"
+            checked={chartOption === "expense"}
+            onChange={() => setChartOption("expense")}
+          />
+          <span>Expense</span>
+        </OptionLabel>
+        {/* <OptionLabel>
+          <input
+            type="radio"
+            value="both"
+            checked={chartOption === "both"}
+            onChange={() => setChartOption("both")}
+          />
+          <span>Both</span>
+        </OptionLabel> */}
+      </OptionsContainer>
+
+      <ChartWrapper>
+        <Line data={chartData} width={chartWidth} height={300} />
+      </ChartWrapper>
+    </ChartContainer>
   );
-}
+};
 
-const ChartStyled = styled.div`
-  background: #fcf6f9;
-  border: 2px solid #ffffff;
-  box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
-  padding: 1rem;
-  border-radius: 20px;
-  height: 70%;
+const ChartContainer = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  position: sticky;
+`;
 
+const OptionsContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+`;
+
+const OptionLabel = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+`;
+
+const ChartWrapper = styled.div`
+  width: 100%;
+  max-width: 600px;
 `;
 
 export default Chart;

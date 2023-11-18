@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config()
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://budget-tracker-app-liard.vercel.app');
@@ -20,7 +21,7 @@ const {
 
 app.use(express.json());
 mongoose.connect(
-  "mongodb+srv://catvyisstudying:VIObLgGMntiEZUR6@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority"
+  process.env.MONGO_URL
 );
 
 app.use(
@@ -41,6 +42,6 @@ app.post("/api/v1/add-expense", addExpense);
 app.get("/api/v1/get-expenses", getExpenses);
 app.delete("/api/v1/delete-expense/:id", deleteExpense);
 
-app.listen(3000, () => {
-  console.log("Server is Running");
+app.listen(process.env.PORT, () => {
+  console.log("Server is Running", process.env.PORT );
 });
