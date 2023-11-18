@@ -10,14 +10,14 @@ const userRoutes = require("./routes/user");
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://budget-tracker-app-liard.vercel.app/"
+    "https://budget-tracker-app-liard.vercel.app"
   ); // Remove trailing slash
 });
 
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://budget-tracker-app-liard.vercel.app/"
+    "https://budget-tracker-app-liard.vercel.app"
   ); // Remove trailing slash
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -39,8 +39,8 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["https://budget-tracker-app-liard.vercel.app/"], // Remove trailing slash
-    origin: ["https://budget-tracker-app-liard.vercel.app/"], // Remove trailing slash
+    origin: ["https://budget-tracker-app-liard.vercel.app"], // Remove trailing slash
+    origin: ["https://budget-tracker-app-liard.vercel.app"], // Remove trailing slash
     methods: ["POST", "GET", "DELETE"],
     credentials: true,
   })
