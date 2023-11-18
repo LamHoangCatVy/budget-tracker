@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { dateFormat } from "../../utils/dateFormat";
+import { dateFormat } from "../utils/dateFormat";
 import {
   bitcoin,
   book,
@@ -21,8 +21,8 @@ import {
   tv,
   users,
   yt,
-} from "../../utils/Icons";
-import Button from "../Button/Button";
+} from "../utils/Icons";
+import Button from "./Button";
 
 const IncomeItem = ({
   id,
