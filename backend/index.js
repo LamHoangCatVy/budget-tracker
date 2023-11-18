@@ -4,10 +4,25 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const userRoutes = require("./routes/user");
 
+// Connect to MongoDB database
+const mongoURI =
+  "mongodb+srv://catvyisstudying:VIObLgGMntiEZUR6@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority";
+
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+db.once("open", function () {
+  console.log("Connected to MongoDB database");
+});
+
 // Set the correct CORS configuration
 app.use(
   cors({
-    origin: "https://budget-tracker-app-liard.vercel.app", // Remove trailing slash
+    origin: "https://budget-tracker-gules-omega.vercel.app", // Remove trailing slash
     methods: ["POST", "GET", "DELETE"],
     credentials: true,
   })
@@ -35,15 +50,7 @@ app.post("/api/v1/add-expense", addExpense);
 app.get("/api/v1/get-expenses", getExpenses);
 app.delete("/api/v1/delete-expense/:id", deleteExpense);
 
-// Connect to MongoDB database
-mongoose
-  .connect(process.env.MONGO_URL)
-  .then(() => {
-    // Listen for requests on the specified port
-    app.listen(process.env.PORT, () => {
-      console.log("Connected to DB and listening on port", process.env.PORT);
-    });
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+// Listen for requests on the specified port
+app.listen(process.env.PORT, () => {
+  console.log("Connected to DB and listening on port", process.env.PORT);
+});
