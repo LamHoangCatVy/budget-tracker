@@ -8,6 +8,9 @@ const userRoutes = require("./routes/user");
 const mongoURI =
   "mongodb+srv://catvyisstudying:VIObLgGMntiEZUR6@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority";
 
+
+
+
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -22,7 +25,7 @@ db.once("open", function () {
 // Set the correct CORS configuration
 app.use(
   cors({
-    origin: "https://budget-tracker-gules-omega.vercel.app", // Remove trailing slash
+    origin: "*", // Remove trailing slash
     methods: ["POST", "GET", "DELETE"],
     credentials: true,
   })
