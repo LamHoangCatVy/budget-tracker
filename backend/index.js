@@ -22,7 +22,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["https://budget-tracker-app-liard.vercel.app/", "http://localhost:3001"],
+    origin: ["https://budget-tracker-app-liard.vercel.app/"],
     methods: ["POST", "GET", "DELETE"],
     credentials: true,
   })
@@ -45,5 +45,5 @@ app.listen(3000, () => {
 });
 
 mongoose.connect(
-  "mongodb+srv://catvyisstudying:VIObLgGMntiEZUR6@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority",
+  "mongodb+srv://catvyisstudying:VIObLgGMntiEZUR6@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority"
 );
