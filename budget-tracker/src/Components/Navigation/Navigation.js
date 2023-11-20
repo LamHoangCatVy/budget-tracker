@@ -1,28 +1,17 @@
 import styled from "styled-components";
-import { menuItems, signupItem, loginItem } from "../utils/menuItems";
-import { Link } from "react-router-dom";
-import { useLogout } from "../hooks/useLogout";
-import { useAuthContext } from "../hooks/useAuthContext";
+import avatar from "../../img/avt.jpg";
+import { signout } from "../../utils/Icons";
+import { menuItems } from "../../utils/menuItems";
 
 const Navigation = ({ active, setActive }) => {
-  const { logout } = useLogout();
-  const { user } = useAuthContext();
-  const handleClick = () => {
-    logout();
-  };
+
   return (
     <NavStyled>
       <div className="user-icon">
+        <img src={avatar} alt="avatar" />
         <div className="text">
-          {user ? (
-            <>
-              <h3>Hi {user.email}!</h3>
-            </>
-          ) : (
-            <h3>Username</h3>
-          )}
-
-          <p>Let's save for future!</p>
+          <h1>Kathy</h1>
+          <p>Save for future!</p>
         </div>
       </div>
       <ul className="menu-items">
@@ -39,60 +28,16 @@ const Navigation = ({ active, setActive }) => {
           );
         })}
       </ul>
-
-      <div className="menu-items login-signup-links">
-        {!user && (
-          <>
-            <Link to="/signup">
-              {signupItem.map((item) => {
-                return (
-                  <li
-                    key={item.id}
-                    onClick={() => setActive(item.id)}
-                    className={active === item.id ? "active" : ""}
-                  >
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </li>
-                );
-              })}
-            </Link>
-            <Link to="/login">
-              {loginItem.map((item) => {
-                return (
-                  <li
-                    key={item.id}
-                    onClick={() => setActive(item.id)}
-                    className={active === item.id ? "active" : ""}
-                  >
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </li>
-                );
-              })}
-            </Link>
-          </>
-        )}
-
-        {user && <ButtonStyled onClick={handleClick}>Logout</ButtonStyled>}
+      <div className="bottom-nav">
+        <li>{signout} Sign Out</li>
       </div>
     </NavStyled>
   );
 };
-const ButtonStyled = styled.button`
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  background-color: blue;
-  color: white;
-  cursor: pointer;
-`;
 
 const NavStyled = styled.nav`
-  text-overflow: ellipsis;
-  overflow: hidden;
   padding: 2rem 1.5rem;
-  width: 200px;
+  width: 374px;
   height: 100%;
   background: rgba(252, 246, 249, 0.78);
   border: 3px solid #ffffff;
@@ -119,11 +64,8 @@ const NavStyled = styled.nav`
     padding: 0.2rem;
     box-shadow: 0px 1px 17px rgba(0, 0, 0, 0.06);
   }
-  h3 {
+  h2 {
     color: rgba(34, 34, 96, 1);
-    width: 300px;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
   p {
     color: rgba(34, 34, 96, 0.6);
@@ -167,15 +109,6 @@ const NavStyled = styled.nav`
       background: #222260;
       border-radius: 0 10px 10px 0;
     }
-  }
-  .login-signup-links {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
   }
 `;
 
