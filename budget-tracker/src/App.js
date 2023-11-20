@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { BrowserRouter } from "react-router-dom";
 import { MainLayout } from "./styles/Layout";
+import { useMemo, useState } from "react";
 import Orb from "./Components/Orb/Orb";
 import Navigation from "./Components/Navigation/Navigation";
 import Dashboard from "./Components/Dashboard/Dashboard";
-import { useMemo, useState } from "react";
 import Income from "./Components/Income/Income";
 import Expenses from "./Components/Expenses/Expenses";
 import { useGlobalContext } from "./context/globalContext";
@@ -29,6 +30,7 @@ function App() {
         return <Signup />;
       case 6:
         return <Login />;
+
       default:
         return <Dashboard />;
     }
@@ -39,13 +41,15 @@ function App() {
   }, []);
 
   return (
-    <AppStyled className="App">
-      {orbMemo}
-      <MainLayout>
-        <Navigation active={active} setActive={setActive} />
-        <main>{displayData()}</main>
-      </MainLayout>
-    </AppStyled>
+    <BrowserRouter>
+      <AppStyled className="App">
+        {orbMemo}
+        <MainLayout>
+          <Navigation active={active} setActive={setActive} />
+          <main>{displayData()}</main>
+        </MainLayout>
+      </AppStyled>
+    </BrowserRouter>
   );
 }
 const AppStyled = styled.div`
