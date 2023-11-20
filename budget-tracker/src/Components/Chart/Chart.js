@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Chart as ChartJs,
   CategoryScale,
@@ -13,8 +13,8 @@ import {
 
 import { Line } from "react-chartjs-2";
 import styled from "styled-components";
-import { useGlobalContext } from "../../context/globalContext";
-import { dateFormat } from "../../utils/dateFormat";
+import { useGlobalContext } from "../context/globalContext";
+import { dateFormat } from "../utils/dateFormat";
 
 ChartJs.register(
   CategoryScale,
