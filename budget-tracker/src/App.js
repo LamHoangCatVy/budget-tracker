@@ -8,11 +8,13 @@ import Income from "./Components/Income/Income";
 import Expenses from "./Components/Expenses/Expenses";
 import { useGlobalContext } from "./context/globalContext";
 import AboutPage from "./Components/AboutUs/AboutUs";
+import Login from "./Pages/Login";
+import Signup from "./Pages/Signup";
 
 function App() {
   const [active, setActive] = useState(1);
 
-  const global = useGlobalContext() 
+  const global = useGlobalContext();
   const displayData = () => {
     switch (active) {
       case 1:
@@ -23,6 +25,10 @@ function App() {
         return <Income />;
       case 4:
         return <Expenses />;
+      case 5:
+        return <Signup />;
+      case 6:
+        return <Login />;
       default:
         return <Dashboard />;
     }
@@ -31,7 +37,7 @@ function App() {
   const orbMemo = useMemo(() => {
     return <Orb />;
   }, []);
-  
+
   return (
     <AppStyled className="App">
       {orbMemo}
