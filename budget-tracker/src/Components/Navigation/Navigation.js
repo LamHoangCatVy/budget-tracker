@@ -92,7 +92,7 @@ const NavStyled = styled.nav`
   text-overflow: ellipsis;
   overflow: hidden;
   padding: 2rem 1.5rem;
-  width: 250px;
+  width: 200px;
   height: 100%;
   background: rgba(252, 246, 249, 0.78);
   border: 3px solid #ffffff;
