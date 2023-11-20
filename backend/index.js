@@ -1,7 +1,14 @@
+const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
 const cors = require("cors");
+const { addIncome, getIncomes, deleteIncome } = require("./controllers/income");
+const {
+  addExpense,
+  getExpenses,
+  deleteExpense,
+} = require("./controllers/expense");
+const userRouter = require("./routes/user");
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -10,17 +17,8 @@ app.use((req, res, next) => {
   next();
 });
 
-const { addIncome, getIncomes, deleteIncome } = require("./controllers/income");
-const {
-  addExpense,
-  getExpenses,
-  deleteExpense,
-} = require("./controllers/expense");
-
+// middleware
 app.use(express.json());
-mongoose.connect(
-  "mongodb+srv://catvyisstudying:VIObLgGMntiEZUR6@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority"
-);
 
 app.use(
   cors({
@@ -29,6 +27,8 @@ app.use(
     credentials: true,
   })
 );
+
+app.use("/api/v1/", userRouter);
 
 // Add income routes
 app.post("/api/v1/add-income", addIncome);
@@ -43,3 +43,7 @@ app.delete("/api/v1/delete-expense/:id", deleteExpense);
 app.listen(3000, () => {
   console.log("Server is Running");
 });
+
+mongoose.connect(
+  "mongodb+srv://catvyisstudying:VIObLgGMntiEZUR6@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority"
+);
