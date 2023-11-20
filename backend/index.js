@@ -22,7 +22,10 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["https://budget-tracker-app-liard.vercel.app/"],
+    origin: [
+      "https://budget-tracker-app-liard.vercel.app/",
+      "http://localhost:3001",
+    ],
     methods: ["POST", "GET", "DELETE"],
     credentials: true,
   })
@@ -44,6 +47,6 @@ app.listen(3000, () => {
   console.log("Server is Running");
 });
 
-mongoose.connect(
-  "mongodb+srv://catvyisstudying:VIObLgGMntiEZUR6@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority"
-);
+mongoose.connect("mongodb+srv://catvyisstudying:sHfo1bx99U54oq7A@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority").then(() => {
+  console.log("Connected to MongoDB");
+})
