@@ -45,5 +45,5 @@ app.listen(3000, () => {
 });
 
 mongoose.connect(
-  "mongodb+srv://catvyisstudying:VIObLgGMntiEZUR6@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority"
+  process.env.MONGO_URL,
 );
