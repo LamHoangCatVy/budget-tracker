@@ -9,6 +9,7 @@ const {
   deleteExpense,
 } = require("./controllers/expense");
 const userRouter = require("./routes/user");
+const { requireAuth } = require("./middleware/requireAuth");
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -34,19 +35,23 @@ app.use(
 app.use("/api/v1/", userRouter);
 
 // Add income routes
-app.post("/api/v1/add-income", addIncome);
-app.get("/api/v1/get-incomes", getIncomes);
-app.delete("/api/v1/delete-income/:id", deleteIncome);
+app.post("/api/v1/add-income", requireAuth, addIncome);
+app.get("/api/v1/get-incomes", requireAuth, getIncomes);
+app.delete("/api/v1/delete-income/:id", requireAuth, deleteIncome);
 
 // Add expense routes
-app.post("/api/v1/add-expense", addExpense);
-app.get("/api/v1/get-expenses", getExpenses);
-app.delete("/api/v1/delete-expense/:id", deleteExpense);
+app.post("/api/v1/add-expense", requireAuth, addExpense);
+app.get("/api/v1/get-expenses", requireAuth, getExpenses);
+app.delete("/api/v1/delete-expense/:id", requireAuth, deleteExpense);
 
 app.listen(3000, () => {
   console.log("Server is Running");
 });
 
-mongoose.connect("mongodb+srv://catvyisstudying:sHfo1bx99U54oq7A@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority").then(() => {
-  console.log("Connected to MongoDB");
-})
+mongoose
+  .connect(
+    "mongodb+srv://catvyisstudying:sHfo1bx99U54oq7A@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority"
+  )
+  .then(() => {
+    console.log("Connected to MongoDB");
+  });
