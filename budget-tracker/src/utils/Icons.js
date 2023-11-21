@@ -4,6 +4,8 @@ export const categories = <i className="fa-solid fa-tags"></i>
 export const accounts = <i className="fa-solid fa-wallet"></i>
 export const settings = <i className="fa-solid fa-cog"></i>
 export const logout = <i className="fa-solid fa-sign-out"></i>
+export const login = <i class="fa-solid fa-right-to-bracket"></i>
+export const signup = <i class="fa-solid fa-user-plus"></i>
 export const trend = <i className="fa-solid fa-money-bill-trend-up"></i>
 export const expenses = <i className="fa-solid fa-money-bill-transfer"></i>
 export const money = <i className="fa-solid fa-money-bill"></i>

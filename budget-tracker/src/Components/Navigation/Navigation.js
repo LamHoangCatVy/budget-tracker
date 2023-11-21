@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import avatar from "../../img/avt.jpg";
 import { signout } from "../../utils/Icons";
-import { menuItems } from "../../utils/menuItems";
+import { menuItems, loginItem, signupItem } from "../../utils/menuItems";
 
 const Navigation = ({ active, setActive }) => {
 
@@ -16,6 +16,19 @@ const Navigation = ({ active, setActive }) => {
       </div>
       <ul className="menu-items">
         {menuItems.map((item) => {
+          return (
+            <li
+              key={item.id}
+              onClick={() => setActive(item.id)}
+              className={active === item.id ? "active" : ""}
+            >
+              {item.icon}
+              <span>{item.title}</span>
+            </li>
+          );
+        })}
+        <hr />
+        {loginItem.map((item) => {
           return (
             <li
               key={item.id}
