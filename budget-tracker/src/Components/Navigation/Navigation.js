@@ -8,8 +8,8 @@ const Navigation = ({ active, setActive }) => {
   const { logout } = useLogout();
 
   const handleClick = () => {
-    logout()
-  }
+    logout();
+  };
 
   return (
     <NavStyled>
@@ -35,6 +35,18 @@ const Navigation = ({ active, setActive }) => {
         })}
         <hr />
         {loginItem.map((item) => {
+          return (
+            <li
+              key={item.id}
+              onClick={() => setActive(item.id)}
+              className={active === item.id ? "active" : ""}
+            >
+              {item.icon}
+              <span>{item.title}</span>
+            </li>
+          );
+        })}
+        {signupItem.map((item) => {
           return (
             <li
               key={item.id}

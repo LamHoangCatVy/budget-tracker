@@ -48,7 +48,7 @@ export const loginItem = [
   {
     id: 6,
     title: "Login",
-    icon: signup,
+    icon: login,
     link: "/login",
   },
 ];

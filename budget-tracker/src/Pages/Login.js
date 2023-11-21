@@ -1,20 +1,19 @@
 import React, { useState } from "react";
-import { useSignup } from "../hooks/useSignup";
-export const Signup = () => {
+import { useLogin } from "../hooks/useLogin";
+export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signup, error, isLoading } = useSignup();
+  const { login, error, isLoading } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    await signup(email, password)
+    await login(email, password);
   };
 
   return (
     <div style={styles.div}>
       <form className="login" onSubmit={handleSubmit} style={styles.form}>
-        <h3 style={styles.title}>Signup</h3>
+        <h3 style={styles.title}>Login</h3>
         <label style={styles.label}>Email</label>
         <input
           type="email"
@@ -30,10 +29,9 @@ export const Signup = () => {
           style={styles.input}
         />
         <button disabled={isLoading} className="btn" style={styles.button}>
-          Sign up
+          Login
         </button>
-
-        {error && <div className="error">{error}</div>}
+        {error && <p style={styles.error}>{error}</p>}
       </form>
     </div>
   );
@@ -78,4 +76,3 @@ const styles = {
     marginTop: "10px",
   },
 };
-

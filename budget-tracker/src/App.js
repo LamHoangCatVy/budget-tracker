@@ -8,7 +8,8 @@ import Income from "./Components/Income/Income";
 import Expenses from "./Components/Expenses/Expenses";
 import { useGlobalContext } from "./context/globalContext";
 import AboutPage from "./Components/AboutUs/AboutUs";
-import Signup from "./Pages/Signup";
+import {Signup} from "./Pages/Signup";
+import {Login} from "./Pages/Login";
 
 function App() {
   const [active, setActive] = useState(1);
@@ -27,7 +28,7 @@ function App() {
       case 5:
         return <Signup/>;
       case 6:
-        return <Signup/>;
+        return <Login/>;
       default:
         return <Dashboard />;
     }
