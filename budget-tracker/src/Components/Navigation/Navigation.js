@@ -3,9 +3,12 @@ import avatar from "../../img/avt.jpg";
 import { signout } from "../../utils/Icons";
 import { menuItems, loginItem, signupItem } from "../../utils/menuItems";
 import { useLogout } from "../../hooks/useLogout";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { Link } from "react-router-dom";
 
 const Navigation = ({ active, setActive }) => {
   const { logout } = useLogout();
+  const { user } = useAuthContext();
 
   const handleClick = () => {
     logout();
@@ -14,10 +17,16 @@ const Navigation = ({ active, setActive }) => {
   return (
     <NavStyled>
       <div className="user-icon">
-        <img src={avatar} alt="avatar" />
         <div className="text">
-          <h1>Kathy</h1>
-          <p>Save for future!</p>
+          {user ? (
+            <>
+              <h3>Hi {user.email}!</h3>
+            </>
+          ) : (
+            <h3>Username</h3>
+          )}
+
+          <p>Let's save for future!</p>
         </div>
       </div>
       <ul className="menu-items">
@@ -33,40 +42,55 @@ const Navigation = ({ active, setActive }) => {
             </li>
           );
         })}
-        <hr />
-        {loginItem.map((item) => {
-          return (
-            <li
-              key={item.id}
-              onClick={() => setActive(item.id)}
-              className={active === item.id ? "active" : ""}
-            >
-              {item.icon}
-              <span>{item.title}</span>
-            </li>
-          );
-        })}
-        {signupItem.map((item) => {
-          return (
-            <li
-              key={item.id}
-              onClick={() => setActive(item.id)}
-              className={active === item.id ? "active" : ""}
-            >
-              {item.icon}
-              <span>{item.title}</span>
-            </li>
-          );
-        })}
       </ul>
-      <div className="bottom-nav">
-        <ButtonStyled onClick={handleClick}>{signout} Sign Out</ButtonStyled>
+      <div className="menu-items login-signup-links">
+        {!user && (
+          <>
+            {signupItem.map((item) => {
+              return (
+                <li
+                  key={item.id}
+                  onClick={() => setActive(item.id)}
+                  className={active === item.id ? "active" : ""}
+                >
+                  {item.icon}
+                  <span>{item.title}</span>
+                </li>
+              );
+            })}
+            {loginItem.map((item) => {
+              return (
+                <li
+                  key={item.id}
+                  onClick={() => setActive(item.id)}
+                  className={active === item.id ? "active" : ""}
+                >
+                  {item.icon}
+                  <span>{item.title}</span>
+                </li>
+              );
+            })}
+          </>
+        )}
+
+        {user && <ButtonStyled onClick={handleClick}>Logout</ButtonStyled>}
       </div>
     </NavStyled>
   );
 };
 
+const ButtonStyled = styled.button`
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+`;
+
 const NavStyled = styled.nav`
+  text-overflow: ellipsis;
+  overflow: hidden;
   padding: 2rem 1.5rem;
   width: 300px;
   height: 100%;
@@ -95,8 +119,11 @@ const NavStyled = styled.nav`
     padding: 0.2rem;
     box-shadow: 0px 1px 17px rgba(0, 0, 0, 0.06);
   }
-  h2 {
+  h3 {
     color: rgba(34, 34, 96, 1);
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   p {
     color: rgba(34, 34, 96, 0.6);
@@ -141,16 +168,15 @@ const NavStyled = styled.nav`
       border-radius: 0 10px 10px 0;
     }
   }
-`;
-
-const ButtonStyled = styled.button`
-  font-family: "Inter", sans-serif;
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  background-color: #222260;
-  color: white;
-  cursor: pointer;
+  .login-signup-links {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+  }
 `;
 
 export default Navigation;
