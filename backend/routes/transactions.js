@@ -1,13 +1,27 @@
-const { addIncome, getIncomes, deleteIncome } = require('../controllers/income')
-const { addExpense, getExpenses, deleteExpense } = require('../controllers/expense')
+const {
+  addIncome,
+  getIncomes,
+  deleteIncome,
+} = require("../controllers/income");
+const {
+  addExpense,
+  getExpenses,
+  deleteExpense,
+} = require("../controllers/expense");
 
-const router = require('express').Router()
+const requireAuth = require("../middleware/requireAuth");
 
-router.post('/add-income', addIncome)
-    .get('/get-incomes', getIncomes)
-    .delete('/delete-income/:id', deleteIncome)
-    .post('/add-expense', addExpense)
-    .get('/get-expenses', getExpenses)
-    .delete('/delete-expense/:id', deleteExpense)
+const router = require("express").Router();
 
-module.exports = router
+//requireAuth middleware protects routes from unauthenticated users
+router.use(requireAuth);
+
+router
+  .post("/add-income", addIncome)
+  .get("/get-incomes", getIncomes)
+  .delete("/delete-income/:id", deleteIncome)
+  .post("/add-expense", addExpense)
+  .get("/get-expenses", getExpenses)
+  .delete("/delete-expense/:id", deleteExpense);
+
+module.exports = router;
