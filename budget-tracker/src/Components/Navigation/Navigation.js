@@ -2,8 +2,14 @@ import styled from "styled-components";
 import avatar from "../../img/avt.jpg";
 import { signout } from "../../utils/Icons";
 import { menuItems, loginItem, signupItem } from "../../utils/menuItems";
+import { useLogout } from "../../hooks/useLogout";
 
 const Navigation = ({ active, setActive }) => {
+  const { logout } = useLogout();
+
+  const handleClick = () => {
+    logout()
+  }
 
   return (
     <NavStyled>
@@ -42,7 +48,7 @@ const Navigation = ({ active, setActive }) => {
         })}
       </ul>
       <div className="bottom-nav">
-        <li>{signout} Sign Out</li>
+        <ButtonStyled onClick={handleClick}>{signout} Sign Out</ButtonStyled>
       </div>
     </NavStyled>
   );
@@ -123,6 +129,16 @@ const NavStyled = styled.nav`
       border-radius: 0 10px 10px 0;
     }
   }
+`;
+
+const ButtonStyled = styled.button`
+  font-family: "Inter", sans-serif;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #222260;
+  color: white;
+  cursor: pointer;
 `;
 
 export default Navigation;
