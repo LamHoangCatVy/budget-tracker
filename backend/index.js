@@ -9,7 +9,6 @@ const {
   deleteExpense,
 } = require("./controllers/expense");
 const userRouter = require("./routes/user");
-const { requireAuth } = require("./middleware/requireAuth");
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -48,10 +47,6 @@ app.listen(3000, () => {
   console.log("Server is Running");
 });
 
-mongoose
-  .connect(
-    "mongodb+srv://catvyisstudying:sHfo1bx99U54oq7A@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority"
-  )
-  .then(() => {
-    console.log("Connected to MongoDB");
-  });
+mongoose.connect("mongodb+srv://catvyisstudying:sHfo1bx99U54oq7A@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority").then(() => {
+  console.log("Connected to MongoDB");
+})
