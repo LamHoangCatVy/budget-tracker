@@ -35,14 +35,14 @@ app.use(
 app.use("/api/v1/", userRouter);
 
 // Add income routes
-app.post("/api/v1/add-income", requireAuth, addIncome);
-app.get("/api/v1/get-incomes", requireAuth, getIncomes);
-app.delete("/api/v1/delete-income/:id", requireAuth, deleteIncome);
+app.post("/api/v1/add-income", addIncome);
+app.get("/api/v1/get-incomes", getIncomes);
+app.delete("/api/v1/delete-income/:id", deleteIncome);
 
 // Add expense routes
-app.post("/api/v1/add-expense", requireAuth, addExpense);
-app.get("/api/v1/get-expenses", requireAuth, getExpenses);
-app.delete("/api/v1/delete-expense/:id", requireAuth, deleteExpense);
+app.post("/api/v1/add-expense", addExpense);
+app.get("/api/v1/get-expenses", getExpenses);
+app.delete("/api/v1/delete-expense/:id", deleteExpense);
 
 app.listen(3000, () => {
   console.log("Server is Running");
