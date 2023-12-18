@@ -4,13 +4,19 @@ import { InnerLayout } from "../../styles/Layout";
 import { useGlobalContext } from "../../context/globalContext";
 import ExpenseForm from "./ExpenseForm";
 import IncomeItem from "../IncomeItem/IncomeItem";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Expenses = () => {
   const { expenses, getExpenses, totalExpenses, deleteExpense } =
     useGlobalContext();
+  const { user } = useAuthContext();
+
   useEffect(() => {
+    if (!user) {
+      return;
+    }
     getExpenses();
-  }, []);
+  }, [user]);
 
   return (
     <ExpensesStyled>
@@ -26,7 +32,6 @@ const Expenses = () => {
             {expenses.map((expense) => {
               const { _id, title, amount, date, category, description, type } =
                 expense;
-              console.log(expense);
               return (
                 <IncomeItem
                   key={_id}

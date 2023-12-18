@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useGlobalContext } from "../../context/globalContext";
 import Button from "../Button/Button";
 import { plus } from "../../utils/Icons";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 function ExpenseForm() {
   const { addExpense, error, setError } = useGlobalContext();
@@ -20,8 +21,13 @@ function ExpenseForm() {
     setInputState({ ...inputState, [name]: e.target.value });
     setError("");
   };
+  const {user} = useAuthContext()
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(!user) {
+      alert('Please login to use this app <3');
+      return;
+    }
     addExpense(inputState);
     setInputState({
       title: "",
@@ -72,7 +78,7 @@ function ExpenseForm() {
           id="category"
           onChange={handleInput("category")}
         >
-          <option value="" disabled>
+          <option value="travelling" disabled>
             Select Option
           </option>
           <option value="education">Education</option>

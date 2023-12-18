@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const GlobalContext = React.createContext();
 
@@ -7,6 +8,7 @@ export const GlobalProvider = ({ children }) => {
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [error, setError] = useState(null);
+  const { user } = useAuthContext();
 
   const addIncome = async (income) => {
     const response = await axios
@@ -17,7 +19,9 @@ export const GlobalProvider = ({ children }) => {
       .catch((error) => {
         setError(error.response.data.message);
       });
-    getIncomes();
+    if (user) {
+      getIncomes();
+    }
   };
 
   const getIncomes = async () => {
@@ -25,7 +29,6 @@ export const GlobalProvider = ({ children }) => {
       `https://budget-tracker-gules-omega.vercel.app/api/v1/get-incomes`
     );
     setIncomes(response.data);
-    console.log(response.data);
   };
 
   const deleteIncome = async (id) => {
@@ -64,7 +67,6 @@ export const GlobalProvider = ({ children }) => {
       `https://budget-tracker-gules-omega.vercel.app/api/v1/get-expenses`
     );
     setExpenses(response.data);
-    console.log(response.data);
   };
 
   const deleteExpense = async (id) => {

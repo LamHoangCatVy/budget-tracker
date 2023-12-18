@@ -5,6 +5,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import Button from "../Button/Button";
 import { plus } from "../../utils/Icons";
 import { useGlobalContext } from "../../context/globalContext";
+
+import { useAuthContext } from "../../hooks/useAuthContext";
+
 function Form() {
   const { addIncome, error } = useGlobalContext();
   const [inputState, setInputState] = useState({
@@ -17,12 +20,18 @@ function Form() {
 
   const { title, amount, date, category, description } = inputState;
 
+  const { user } = useAuthContext();
+
   const handleInput = (name) => (e) => {
     setInputState({ ...inputState, [name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!user) {
+      alert("Please login to use this app <3");
+      return;
+    }
     addIncome(inputState);
     setInputState({
       title: "",
@@ -35,7 +44,7 @@ function Form() {
 
   return (
     <FormStyled onSubmit={handleSubmit}>
-            {error && <p className="error">{error}</p>}
+      {error && <p className="error">{error}</p>}
 
       <div className="input-control">
         <input

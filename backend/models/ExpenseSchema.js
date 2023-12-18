@@ -33,6 +33,10 @@ const ExpenseSchema = new mongoose.Schema({
         required: true,
         trim: true,
         maxLength: 50
+    },
+    user_id: {
+        type: String,
+        required: true
     }
 }, { timestamps: true })
 

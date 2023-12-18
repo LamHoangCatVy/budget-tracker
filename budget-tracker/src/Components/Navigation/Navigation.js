@@ -1,10 +1,7 @@
 import styled from "styled-components";
-import avatar from "../../img/avt.jpg";
-import { signout } from "../../utils/Icons";
 import { menuItems, loginItem, signupItem } from "../../utils/menuItems";
 import { useLogout } from "../../hooks/useLogout";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { Link } from "react-router-dom";
 
 const Navigation = ({ active, setActive }) => {
   const { logout } = useLogout();

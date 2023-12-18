@@ -6,46 +6,48 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import { useMemo, useState } from "react";
 import Income from "./Components/Income/Income";
 import Expenses from "./Components/Expenses/Expenses";
-import { useGlobalContext } from "./context/globalContext";
 import AboutPage from "./Components/AboutUs/AboutUs";
-import {Signup} from "./Pages/Signup";
-import {Login} from "./Pages/Login";
+import { Signup } from "./Pages/Signup";
+import { Login } from "./Pages/Login";
+import { BrowserRouter, Navigate } from "react-router-dom";
+import { useAuthContext } from "./hooks/useAuthContext";
 
 function App() {
   const [active, setActive] = useState(1);
-
-  const global = useGlobalContext() 
-  const displayData = () => {
+  const {user} = useAuthContext()
+  const displayData = (user) => {
     switch (active) {
       case 1:
-        return <AboutPage />;
+        return user ? <AboutPage /> : <Login/>;
       case 2:
-        return <Dashboard />;
+        return user ? <Dashboard /> : <Login/>;
       case 3:
-        return <Income />;
+        return user ? <Income /> : <Login/>;
       case 4:
-        return <Expenses />;
+        return user ? <Expenses /> : <Login/>;
       case 5:
-        return <Signup/>;
+        return !user ? <Signup /> : <AboutPage/>;
       case 6:
-        return <Login/>;
+        return <Login />;
       default:
-        return <Dashboard />;
+        return <Login />;
     }
   };
 
   const orbMemo = useMemo(() => {
     return <Orb />;
   }, []);
-  
+
   return (
-    <AppStyled className="App">
-      {orbMemo}
-      <MainLayout>
-        <Navigation active={active} setActive={setActive} />
-        <main>{displayData()}</main>
-      </MainLayout>
-    </AppStyled>
+    <BrowserRouter>
+      <AppStyled className="App">
+        {orbMemo}
+        <MainLayout>
+          <Navigation active={active} setActive={setActive} />
+          <main>{displayData(user)}</main>
+        </MainLayout>
+      </AppStyled>
+    </BrowserRouter>
   );
 }
 const AppStyled = styled.div`

@@ -5,13 +5,18 @@ import { useGlobalContext } from "../../context/globalContext";
 import Form from "../Form/Form";
 import { useEffect } from "react";
 import IncomeItem from "../IncomeItem/IncomeItem";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Income = () => {
   const { incomes, getIncomes, deleteIncome, totalIncome, error } =
     useGlobalContext();
+  const { user } = useAuthContext();
   useEffect(() => {
+    if (!user) {
+      return;
+    }
     getIncomes();
-  }, []);
+  }, [user, getIncomes]);
   return (
     <IncomeStyled>
       <InnerLayout>

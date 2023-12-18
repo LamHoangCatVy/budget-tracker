@@ -5,6 +5,7 @@ import History from "../../History/History";
 import { InnerLayout } from "../../styles/Layout";
 import { dollar } from "../../utils/Icons";
 import Chart from "../Chart/Chart";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 function Dashboard() {
   const {
@@ -16,11 +17,15 @@ function Dashboard() {
     getIncomes,
     getExpenses,
   } = useGlobalContext();
+  const { user } = useAuthContext();
 
   useEffect(() => {
+    if (!user) {
+      return;
+    }
     getIncomes();
     getExpenses();
-  }, []);
+  }, [user]);
 
   return (
     <DashboardStyled>
