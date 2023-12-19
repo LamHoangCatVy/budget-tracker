@@ -7,7 +7,7 @@ const Navigation = ({ active, setActive }) => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
 
-  const handleClick = () => {
+  const handleLogout = () => {
     logout();
   };
 
@@ -70,7 +70,7 @@ const Navigation = ({ active, setActive }) => {
           </>
         )}
 
-        {user && <ButtonStyled onClick={handleClick}>Logout</ButtonStyled>}
+        {user && <ButtonStyled onClick={handleLogout}>Logout</ButtonStyled>}
       </div>
     </NavStyled>
   );
@@ -78,9 +78,9 @@ const Navigation = ({ active, setActive }) => {
 
 const ButtonStyled = styled.button`
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 20px;
   border: none;
-  background-color: blue;
+  background-color: rgba(34, 34, 96, 1);
   color: white;
   cursor: pointer;
 `;

@@ -3,7 +3,7 @@ import { MainLayout } from "./styles/Layout";
 import Orb from "./Components/Orb/Orb";
 import Navigation from "./Components/Navigation/Navigation";
 import Dashboard from "./Components/Dashboard/Dashboard";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Income from "./Components/Income/Income";
 import Expenses from "./Components/Expenses/Expenses";
 import AboutPage from "./Components/AboutUs/AboutUs";
@@ -14,21 +14,37 @@ import { useAuthContext } from "./hooks/useAuthContext";
 
 function App() {
   const [active, setActive] = useState(1);
-  const {user} = useAuthContext()
+  const { user } = useAuthContext();
+  const [isWideScreen, setIsWideScreen] = useState(
+    window.innerWidth >= 0.7 * window.screen.width
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsWideScreen(window.innerWidth >= 0.8 * window.screen.width);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const displayData = (user) => {
     switch (active) {
       case 1:
-        return user ? <AboutPage /> : <Login/>;
+        return user ? <AboutPage /> : <Login />;
       case 2:
-        return user ? <Dashboard /> : <Login/>;
+        return user ? <Dashboard /> : <Login />;
       case 3:
-        return user ? <Income /> : <Login/>;
+        return user ? <Income /> : <Login />;
       case 4:
-        return user ? <Expenses /> : <Login/>;
+        return user ? <Expenses /> : <Login />;
       case 5:
-        return !user ? <Signup /> : <AboutPage/>;
+        return !user ? <Signup /> : <AboutPage />;
       case 6:
-        return <Login />;
+        return !user ? <Signup /> : <AboutPage />;
       default:
         return <Login />;
     }
@@ -43,8 +59,19 @@ function App() {
       <AppStyled className="App">
         {orbMemo}
         <MainLayout>
-          <Navigation active={active} setActive={setActive} />
-          <main>{displayData(user)}</main>
+          {!isWideScreen && (
+            <Message>
+              For the best experience, please using this app with at least 70% of
+              your screen width. You'll get more space to enjoy all the
+              features!
+            </Message>
+          )}
+          {isWideScreen && (
+            <>
+              <Navigation active={active} setActive={setActive} />
+              <main>{displayData(user)}</main>
+            </>
+          )}
         </MainLayout>
       </AppStyled>
     </BrowserRouter>
@@ -52,7 +79,6 @@ function App() {
 }
 const AppStyled = styled.div`
   height: 100vh;
-  background-image: url(${(props) => props.bg}); //add images;
   position: relative;
   main {
     flex: 1;
@@ -66,4 +92,13 @@ const AppStyled = styled.div`
     }
   }
 `;
+const Message = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  padding: 20px;
+  color: black;
+`;
+
 export default App;

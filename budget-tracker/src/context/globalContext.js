@@ -12,10 +12,10 @@ export const GlobalProvider = ({ children }) => {
 
   const addIncome = async (income) => {
     const headers = {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: `Bearer ${user.token}`,
     };
-  
+
     const response = await axios
       .post(
         `https://budget-tracker-gules-omega.vercel.app/api/v1/add-income`,
@@ -25,43 +25,42 @@ export const GlobalProvider = ({ children }) => {
       .catch((error) => {
         setError(error.response.data.message);
       });
-  
+
     if (user) {
       getIncomes();
     }
   };
   const getIncomes = async () => {
     const headers = {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: `Bearer ${user.token}`,
     };
-  
+
     const response = await axios.get(
       `https://budget-tracker-gules-omega.vercel.app/api/v1/get-incomes`,
       { headers }
     );
-  
-    setIncomes(response.data);
+        setIncomes(response.data);
   };
-  
+
   const deleteIncome = async (id) => {
     try {
       const headers = {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${user.token}`,
       };
-  
+
       await axios.delete(
         `https://budget-tracker-gules-omega.vercel.app/api/v1/delete-income/${id}`,
         { headers }
       );
-  
+
       getIncomes();
     } catch (error) {
       console.error("Error deleting income:", error);
     }
   };
-  
+
   const totalIncome = () => {
     let totalIncome = 0;
     incomes.forEach((income) => {
@@ -73,58 +72,58 @@ export const GlobalProvider = ({ children }) => {
   const addExpense = async (expense) => {
     try {
       const headers = {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${user.token}`,
       };
-  
+
       const response = await axios.post(
         `https://budget-tracker-gules-omega.vercel.app/api/v1/add-expense`,
         expense,
         { headers }
       );
-  
+
       getExpenses();
     } catch (error) {
       setError(error.response.data.message);
     }
   };
-  
+
   const getExpenses = async () => {
     try {
       const headers = {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${user.token}`,
       };
-  
+
       const response = await axios.get(
         `https://budget-tracker-gules-omega.vercel.app/api/v1/get-expenses`,
         { headers }
       );
-  
+
       setExpenses(response.data);
     } catch (error) {
       setError(error.response.data.message);
     }
   };
-  
+
   const deleteExpense = async (id) => {
     try {
       const headers = {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${user.token}`,
       };
-  
+
       await axios.delete(
         `https://budget-tracker-gules-omega.vercel.app/api/v1/delete-expense/${id}`,
         { headers }
       );
-  
+
       getExpenses();
     } catch (error) {
       setError(error.response.data.message);
     }
   };
-  
+
   const totalExpenses = () => {
     let totalIncome = 0;
     expenses.forEach((income) => {

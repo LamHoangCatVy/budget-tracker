@@ -7,6 +7,7 @@ export const authReducer = (state, action) => {
       case "LOGIN":
         return { ...state, user: action.payload };
       case "LOGOUT":
+        localStorage.removeItem("token");
         return { ...state, user: null };
       default:
         return state;
@@ -25,8 +26,6 @@ export const AuthContextProvider = ({ children }) => {
       dispatch({ type: "LOGIN", payload: user });
     }
   }, []);
-
-  console.log("Auth Context state:", state);
 
   return(
     <AuthContext.Provider value={{...state, dispatch}}>

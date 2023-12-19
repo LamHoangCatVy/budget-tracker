@@ -12,11 +12,11 @@ const Income = () => {
     useGlobalContext();
   const { user } = useAuthContext();
   useEffect(() => {
-    if (!user) {
-      return;
+    if(!user){
+      return null;
     }
     getIncomes();
-  }, [user, getIncomes]);
+  }, []);
   return (
     <IncomeStyled>
       <InnerLayout>
