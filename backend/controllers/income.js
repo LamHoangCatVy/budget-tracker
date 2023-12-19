@@ -1,8 +1,8 @@
 const IncomeSchema = require("../models/IncomeSchema");
 
 exports.addIncome = async (req, res) => {
-  const { user_id } = req.user._id;
   const { title, amount, category, description, date } = req.body;
+  const user_id = req.user._id;
   const income = IncomeSchema({
     title,
     amount,
@@ -11,6 +11,7 @@ exports.addIncome = async (req, res) => {
     date,
     user_id,
   });
+
   try {
     //validations
     if (!title || !category || !description || !date) {
@@ -29,7 +30,7 @@ exports.addIncome = async (req, res) => {
 };
 
 exports.getIncomes = async (req, res) => {
-  const { user_id } = req.user._id;
+  const  user_id = req.user._id;
   try {
     const incomes = await IncomeSchema.find({ user_id }).sort({
       createdAt: -1,

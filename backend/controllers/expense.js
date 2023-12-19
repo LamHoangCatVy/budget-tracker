@@ -2,8 +2,9 @@ const ExpenseSchema = require("../models/ExpenseSchema")
 
 exports.addExpense = async (req, res) => {
     const { title, amount, category, description, date } = req.body
+    const user_id = req.user._id
     const expense = ExpenseSchema({
-        title, amount, category, description, date
+        title, amount, category, description, date, user_id
     })
     try {
         //validations
@@ -24,7 +25,8 @@ exports.addExpense = async (req, res) => {
 
 exports.getExpenses = async (req, res) => {
     try {
-        const expenses = await ExpenseSchema.find().sort({ createdAt: -1 })
+        const user_id = req.user._id
+        const expenses = await ExpenseSchema.find({ user_id }).sort({ createdAt: -1 })
         res.status(200).json(expenses)
     } catch (error) {
         res.status(500).json({ message: "Server Error" })
