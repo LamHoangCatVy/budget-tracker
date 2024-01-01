@@ -12,7 +12,7 @@ const Income = () => {
     useGlobalContext();
   const { user } = useAuthContext();
   useEffect(() => {
-    if(!user){
+    if (!user) {
       return null;
     }
     getIncomes();
@@ -80,6 +80,40 @@ const IncomeStyled = styled.div`
     gap: 2rem;
     .incomes {
       flex: 1;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    .total-income {
+      font-size: 0.9rem;
+
+      span {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    .total-income {
+      font-size: 0.5rem;
+
+      span {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  @media (max-width: 568px) {
+    .total-income {
+      display: none;
     }
   }
 `;

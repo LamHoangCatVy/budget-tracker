@@ -54,7 +54,7 @@ const HistoryStyled = styled.div`
   }
   @media (max-width: 1200px) {
     h2{
-      padding-top: 3.5rem;
+      padding-top: 10rem;
     }
   }
 

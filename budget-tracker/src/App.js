@@ -21,17 +21,17 @@ function App() {
       case 1:
         return <AboutPage />;
       case 2:
-        return user ? <Dashboard /> : <Login /> && alert("Please login first");
+        return user ? <Dashboard /> : <Login />;
       case 3:
         return user ? <Income /> : <Login />;
       case 4:
-        return user ? <Expenses /> : <Login />;
+        return user ? <Expenses /> : <Login /> ;
       case 5:
         return !user ? <Signup /> : <AboutPage />;
       case 6:
-        return !user ? <Signup /> : <AboutPage />;
+        return !user ? <Login /> : <AboutPage />;
       default:
-        return <Login />;
+        return <AboutPage />;
     }
   };
 

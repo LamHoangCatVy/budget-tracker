@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { menuItems, loginItem, signupItem } from "../../utils/menuItems";
 import { useLogout } from "../../hooks/useLogout";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { Link } from "react-router-dom";
 
 const Navigation = ({ active, setActive }) => {
   const { logout } = useLogout();
@@ -27,18 +28,24 @@ const Navigation = ({ active, setActive }) => {
         </div>
       </div>
       <ul className="menu-items">
-        {menuItems.map((item) => {
-          return (
-            <li
-              key={item.id}
-              onClick={() => setActive(item.id)}
-              className={active === item.id ? "active" : ""}
-            >
-              {item.icon}
-              <span>{item.title}</span>
-            </li>
-          );
-        })}
+        
+    
+        {user && (
+          <>
+            {menuItems.map((item) => {
+              return (
+                <li
+                  key={item.id}
+                  onClick={() => setActive(item.id)}
+                  className={active === item.id ? "active" : ""}
+                >
+                  <Link to={item.link}>{item.icon}</Link>
+                  <span>{item.title}</span>
+                </li>
+              );
+            })}
+          </>
+        )}
       </ul>
       <div className="menu-items login-signup-links">
         {!user && (

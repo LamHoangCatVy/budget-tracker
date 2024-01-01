@@ -51,9 +51,10 @@ function Dashboard() {
               </div>
               <div className="balance">
                 <h2>Total Balance</h2>
-                <p color={totalBalance < 0 ? "red" : "green"}>
+                <p style={{ color: totalBalance < 0 ? "red" : "green" }}>
                   {totalBalance}
                 </p>
+                {totalBalance < 0 ? <p style={{fontSize:"1rem", color:"red"}}>Oops, you must spend carefully!</p> : <p style={{fontSize:"1rem", color:"var(--color-green)"}}>Yeey, we are spending in control!</p>}
               </div>
             </div>
           </div>

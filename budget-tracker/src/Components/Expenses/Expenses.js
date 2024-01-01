@@ -22,7 +22,7 @@ const Expenses = () => {
     <ExpensesStyled>
       <InnerLayout>
         <h2 className="total-income">
-          Total Expense <span>${totalExpenses()}</span>
+          Total Expense <span style={{color: "red"}}>${totalExpenses()}</span>
         </h2>
         <div className="income-content">
           <div className="form-container">
@@ -83,5 +83,41 @@ const ExpensesStyled = styled.div`
       flex: 1;
     }
   }
+
+  @media (max-width: 1200px) {
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    .total-income {
+      font-size: 0.9rem;
+
+      span {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    .total-income {
+      font-size: 0.5rem;
+
+      span {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  @media (max-width: 568px) {
+    .total-income {
+      display: none;
+    }
+  }
+
+
 `;
 export default Expenses;
