@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { InnerLayout } from "../../styles/Layout";
 import { useGlobalContext } from "../../context/globalContext";
-import ExpenseForm from "./ExpenseForm";
-import IncomeItem from "../IncomeItem/IncomeItem";
+import ExpenseForm from "../Form/ExpenseForm";
+import IncomeItem from "../../utils/IncomeItem";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Expenses = () => {
@@ -16,7 +16,7 @@ const Expenses = () => {
       return;
     }
     getExpenses();
-  }, [user]);
+  }, [user, getExpenses]);
 
   return (
     <ExpensesStyled>

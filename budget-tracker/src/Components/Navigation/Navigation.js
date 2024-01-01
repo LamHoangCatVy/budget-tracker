@@ -20,7 +20,7 @@ const Navigation = ({ active, setActive }) => {
               <h3>Hi {user.email}!</h3>
             </>
           ) : (
-            <h3>Username</h3>
+            <h3>Hello Mate!</h3>
           )}
 
           <p>Let's save for future!</p>

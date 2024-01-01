@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Chart as ChartJs,
   CategoryScale,
@@ -21,29 +21,12 @@ ChartJs.register(
   LinearScale,
   PointElement,
   LineElement,
-  Title,
-  Tooltip,
-  Legend,
   ArcElement
 );
 
 const Chart = () => {
   const { incomes, expenses } = useGlobalContext();
   const [chartOption, setChartOption] = useState("income");
-  const [chartWidth, setChartWidth] = useState(0);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setChartWidth(chartContainerRef.current.offsetWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  });
 
   const sortedIncomes = incomes.sort(
     (a, b) => new Date(a.date) - new Date(b.date)
@@ -93,11 +76,16 @@ const Chart = () => {
   } else if (chartOption === "expense") {
     chartData = expenseData;
   } else {
-    const allLabels = [...new Set([...incomeData.labels, ...expenseData.labels])];
+    const allLabels = [
+      ...new Set([...incomeData.labels, ...expenseData.labels]),
+    ];
     allLabels.sort((a, b) => new Date(a) - new Date(b));
-  
-    const alignedData = alignDataWithDates([...sortedIncomes, ...sortedExpenses], allLabels);
-  
+
+    const alignedData = alignDataWithDates(
+      [...sortedIncomes, ...sortedExpenses],
+      allLabels
+    );
+
     chartData = {
       labels: allLabels,
       datasets: [
@@ -106,16 +94,18 @@ const Chart = () => {
           data: alignedData,
           backgroundColor: alignedData.map((dataPoint, index) => {
             const type = index < sortedIncomes.length ? "income" : "expense";
-            return type === "income" ? "rgba(0, 128, 0, 1)" : "rgba(255, 0, 0, 1)";
+            return type === "income"
+              ? "rgba(0, 128, 0, 1)"
+              : "rgba(255, 0, 0, 1)";
           }),
           tension: 0.2,
         },
       ],
     };
   }
-    
-  const chartContainerRef = React.createRef();
 
+  const chartContainerRef = React.createRef();
+  
   return (
     <ChartContainer ref={chartContainerRef}>
       <OptionsContainer>
@@ -140,7 +130,7 @@ const Chart = () => {
       </OptionsContainer>
 
       <ChartWrapper>
-        <Line data={chartData} width={chartWidth} height={300} />
+        <Line data={chartData} width={0} height={300} />
       </ChartWrapper>
     </ChartContainer>
   );

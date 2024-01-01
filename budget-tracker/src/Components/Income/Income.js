@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { InnerLayout } from "../../styles/Layout";
 import { useGlobalContext } from "../../context/globalContext";
-import Form from "../Form/Form";
+import Form from "../Form/IncomeForm";
 import { useEffect } from "react";
-import IncomeItem from "../IncomeItem/IncomeItem";
+import IncomeItem from "../../utils/IncomeItem";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Income = () => {

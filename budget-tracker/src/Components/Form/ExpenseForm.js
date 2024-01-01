@@ -78,7 +78,7 @@ function ExpenseForm() {
           id="category"
           onChange={handleInput("category")}
         >
-          <option value="travelling" disabled>
+          <option value="">
             Select Option
           </option>
           <option value="education">Education</option>

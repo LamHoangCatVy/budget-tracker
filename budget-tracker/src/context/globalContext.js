@@ -133,10 +133,6 @@ export const GlobalProvider = ({ children }) => {
     return totalIncome;
   };
 
-  const totalBalance = () => {
-    return totalIncome() - totalExpenses();
-  };
-
   const transactionHistory = () => {
     const history = [...incomes, ...expenses];
     history.sort((a, b) => {
@@ -160,7 +156,6 @@ export const GlobalProvider = ({ children }) => {
         totalExpenses,
         error,
         setError,
-        totalBalance,
         transactionHistory,
       }}
     >

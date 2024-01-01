@@ -52,6 +52,12 @@ const HistoryStyled = styled.div`
     justify-content: space-between;
     align-items: center;
   }
+  @media (max-width: 1200px) {
+    h2{
+      padding-top: 3.5rem;
+    }
+  }
+
 `;
 
 export default History;
