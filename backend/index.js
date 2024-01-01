@@ -45,6 +45,6 @@ app.listen(3000, () => {
   console.log("Server is Running");
 });
 
-mongoose.connect("mongodb+srv://catvyisstudying:sHfo1bx99U54oq7A@cluster0.rb41xr6.mongodb.net/?retryWrites=true&w=majority").then(() => {
+mongoose.connect(process.env.MONGODB_URI).then(() => {
   console.log("Connected to MongoDB");
 })
