@@ -86,12 +86,6 @@ function AboutPage() {
       </div>
       <Carousel showThumbs={false}>
         <div>
-          <img src={signup} alt="Sign up Page" />
-        </div>
-        <div>
-          <img src={loginpage} alt="Login Page" />
-        </div>
-        <div>
           <img src={incomes} alt="Incomes" />
         </div>
         <div>
